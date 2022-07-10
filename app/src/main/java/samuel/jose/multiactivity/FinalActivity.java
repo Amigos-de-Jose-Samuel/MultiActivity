@@ -18,30 +18,23 @@ public class FinalActivity extends AppCompatActivity {
         Bundle params = it.getExtras();
         if (it != null) {
             String name = params.getString("name");
-            double imc = params.getDouble("imc", 0.0);
+            Double media = params.getDouble("media");
+            int frequencia = params.getInt("frequencia", 0);
             String result;
 
-            if (imc < 15) {
-                result = "Extremely underweight";
-            } else if (imc < 16) {
-                result = "Dangerously underweight";
-            } else if (imc < 18.5) {
-                result = "Underweight";
-            } else if (imc < 25) {
-                result = "Ideal weight";
-            } else if (imc < 30) {
-                result = "Overweight";
-            } else if (imc < 35) {
-                result = "Overweight degree I";
-            } else if (imc < 46) {
-                result = "Overweight degree II";
+            if (media >= 7 && frequencia >= 75) {
+                result = "Aprovado(a)";
+            } else if (media >= 4 && media <=7 && frequencia >= 75) {
+                result = "Final";
+            } else if (frequencia < 75) {
+                result = "Reprovado(a) por falta";
             } else {
-                result = "Overweight degree III";
+                result = "Reprovado(a) por nota";
             }
 
-            result += String.format(" (%.2f)", imc);
+            result += String.format(" com média = %.2f", media);
 
-            output.setText("The IMC of " + name + " is " + result);
+            output.setText("A situação na disciplina do(a) " + name + " é " + result);
         }
     }
 }
